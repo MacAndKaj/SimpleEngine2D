@@ -33,4 +33,5 @@ void MainWindow::addItemToDraw (sf::Drawable& item)
 
 void MainWindow::drawAllItems ()
 {
+
 }

@@ -5,36 +5,40 @@
 #include <Buttons/LetterButton.hpp>
 #include <iostream>
 
-LetterButton::LetterButton ()
+LetterButton::LetterButton()
         : _log("LetterButton")
-{
-    if(!_font.loadFromFile("Pacific_Again.ttf")){
-        _log << "Error while loading font!" << logging::logEnd;
-    }
-}
-
-LetterButton::LetterButton(int positionY, int positionX, unsigned int size, const std::string &txt)
-        : _positionCentralY(positionY)
-        , _positionCentralX(positionX)
-        , _fontSize(size)
         , _clicked(false)
         , _focused(false)
-        , _log("LetterButton("+txt+')')
 {
-    sf::Vector2f tmp(positionX, positionY);
-    _basicColor = sf::Color::Black;
-    _onClickColor = sf::Color::Blue;
-    _onFocusColor = sf::Color::Red;
-    _buttonText.setString(txt);
-    if(!_font.loadFromFile("Pacific_Again.ttf")){
+//    sf::Vector2f tmp(positionX, positionY);
+    if (!_font.loadFromFile("Pacific_Again.ttf"))
+    {
         _log << "Error while loading font!" << logging::logEnd;
     }
-    _buttonText.setFont(_font);
-    _buttonText.setFillColor(_basicColor);
-    _buttonText.setPosition(tmp);
-    _buttonText.setCharacterSize(_fontSize);
-
 }
+
+//LetterButton::LetterButton(int positionY, int positionX, unsigned int size, const std::string &txt)
+//        : _positionCentralY(positionY)
+//        , _positionCentralX(positionX)
+//        , _fontSize(size)
+//        , _clicked(false)
+//        , _focused(false)
+//        , _log("LetterButton(" + txt + ')')
+//{
+//    _basicColor = sf::Color::Black;
+//    _onClickColor = sf::Color::Blue;
+//    _onFocusColor = sf::Color::Red;
+//    _buttonText.setString(txt);
+//    if (!_font.loadFromFile("Pacific_Again.ttf"))
+//    {
+//        _log << "Error while loading font!" << logging::logEnd;
+//    }
+//    _buttonText.setFont(_font);
+//    _buttonText.setFillColor(_basicColor);
+//    _buttonText.setPosition(tmp);
+//    _buttonText.setCharacterSize(_fontSize);
+//
+//}
 
 LetterButton::~LetterButton()
 {
@@ -55,7 +59,7 @@ void LetterButton::unclick()
 {
     if (_clicked)
     {
-        if(_callback)
+        if (_callback)
         {
             _log << __FUNCTION__ << "callback applied." << logging::logEnd;
             _callback();
@@ -70,7 +74,7 @@ bool LetterButton::isClicked()
     return _clicked;
 }
 
-void LetterButton::setFunctionality (std::function<void()> &functionality)
+void LetterButton::setFunctionality(std::function<void()> &functionality)
 {
     _callback = functionality;
 }
@@ -113,10 +117,10 @@ void LetterButton::unfocus()
     }
 }
 
-void LetterButton::setButtonText (const std::string &buttonText)
+void LetterButton::setButtonText(const std::string &buttonText)
 {
     _buttonText.setString(buttonText);
-    _log.setNameOfLoggerOwner("LetterButton("+buttonText+')');
+    _log.setNameOfLoggerOwner("LetterButton(" + buttonText + ')');
 }
 
 

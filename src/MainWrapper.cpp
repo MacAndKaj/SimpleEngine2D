@@ -1,4 +1,4 @@
-
+#include <SFML/Graphics/Rect.hpp>
 
 class MainWrapper
 {
@@ -14,6 +14,7 @@ int MainWrapper::execute()
 
 int main()
 {
+    sf::Rect<int> rec;
     MainWrapper App;
     return App.execute();
 }

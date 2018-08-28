@@ -22,7 +22,7 @@ public:
         _change = true;
     }
 
-    bool _change;
+    bool _change{};
     std::unique_ptr<LetterButton> _sut;
 };
 
