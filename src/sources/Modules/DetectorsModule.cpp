@@ -2,7 +2,7 @@
 // Created by mkajdak on 28.08.18.
 //
 
-#include <Factories/DetectorsModule.hpp>
+#include <Modules/DetectorsModule.hpp>
 #include <Detectors/CollisionDetector.hpp>
 #include <Detectors/EventDetector.hpp>
 

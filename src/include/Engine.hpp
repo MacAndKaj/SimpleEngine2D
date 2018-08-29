@@ -5,7 +5,7 @@
 #ifndef PARANOID_ENGINE_HPP
 #define PARANOID_ENGINE_HPP
 
-#include <Factories/DetectorsModule.hpp>
+#include <Modules/DetectorsModule.hpp>
 
 namespace eng
 {

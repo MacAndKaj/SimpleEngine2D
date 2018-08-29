@@ -5,18 +5,19 @@
 #ifndef PARANOID_LETTERBUTTON_HPP
 #define PARANOID_LETTERBUTTON_HPP
 
-#include <Interface/IClickable.hpp>
+#include <functional>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <functional>
+#include <Interface/IClickable.hpp>
+#include <Interface/IElement.hpp>
 #include <Logger.hpp>
 
 class ICallable;
 
 class LetterButton
-        : public IClickable, public sf::Drawable
+        : public IClickable, protected eng::IElement
 {
 public:
     LetterButton ();
@@ -32,6 +33,11 @@ public:
     //sf::Drawable
     void draw (sf::RenderTarget &target, sf::RenderStates states) const override;
 
+    //eng::IElement
+protected:
+    eng::ElementProperties getElementProperties() const override;
+public:
+
     void setFunctionality(std::function<void()> &func);
     void setBasicColor (const sf::Color &basicColor);
     void setOnFocusColor (const sf::Color &onFocusColor);
@@ -42,14 +48,13 @@ private:
     bool _clicked;
     bool _focused;
     unsigned int _fontSize;
-    int _positionCentralY;
-    int _positionCentralX;
+
 
     sf::Font _font;
     sf::Text _buttonText;
-    sf::Color _basicColor;
-    sf::Color _onFocusColor;
-    sf::Color _onClickColor;
+    sf::Color _basicColor = sf::Color::Black;
+    sf::Color _onFocusColor = sf::Color::Blue;
+    sf::Color _onClickColor = sf::Color::Red;
     std::function<void (void)> _callback;
 };
 

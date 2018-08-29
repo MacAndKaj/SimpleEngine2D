@@ -10,35 +10,16 @@ LetterButton::LetterButton()
         , _clicked(false)
         , _focused(false)
 {
-//    sf::Vector2f tmp(positionX, positionY);
+    _buttonText.setString("LetterButton");
     if (!_font.loadFromFile("Pacific_Again.ttf"))
     {
         _log << "Error while loading font!" << logging::logEnd;
-    }
-}
 
-//LetterButton::LetterButton(int positionY, int positionX, unsigned int size, const std::string &txt)
-//        : _positionCentralY(positionY)
-//        , _positionCentralX(positionX)
-//        , _fontSize(size)
-//        , _clicked(false)
-//        , _focused(false)
-//        , _log("LetterButton(" + txt + ')')
-//{
-//    _basicColor = sf::Color::Black;
-//    _onClickColor = sf::Color::Blue;
-//    _onFocusColor = sf::Color::Red;
-//    _buttonText.setString(txt);
-//    if (!_font.loadFromFile("Pacific_Again.ttf"))
-//    {
-//        _log << "Error while loading font!" << logging::logEnd;
-//    }
-//    _buttonText.setFont(_font);
-//    _buttonText.setFillColor(_basicColor);
-//    _buttonText.setPosition(tmp);
-//    _buttonText.setCharacterSize(_fontSize);
-//
-//}
+    }
+    _buttonText.setFont(_font);
+    _buttonText.setFillColor(_basicColor);
+
+}
 
 LetterButton::~LetterButton()
 {
@@ -121,6 +102,11 @@ void LetterButton::setButtonText(const std::string &buttonText)
 {
     _buttonText.setString(buttonText);
     _log.setNameOfLoggerOwner("LetterButton(" + buttonText + ')');
+}
+
+eng::ElementProperties LetterButton::getElementProperties() const
+{
+    return _elementProperties;
 }
 
 

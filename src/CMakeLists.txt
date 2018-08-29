@@ -1,10 +1,11 @@
 include_directories(include)
 file(GLOB src_files
-        sources/Buttons/*.cpp
-        sources/Scenario/*.cpp
-        sources/Detectors/*.cpp
-        sources/Factories/*.cpp
         sources/Animations/*.cpp
+        sources/Buttons/*.cpp
+        sources/Detectors/*.cpp
+        sources/Helpers/*.cpp
+        sources/Modules/*.cpp
+        sources/Scenario/*.cpp
         sources/Windows/*.cpp
         sources/*.cpp)
 add_library(MyLib ${src_files})
