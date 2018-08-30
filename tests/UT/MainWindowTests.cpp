@@ -47,16 +47,12 @@ TEST_F(MainWindowTests, MainWindowTests_ShouldAddCorrectElements_Test)
 {
     unsigned int nrOfElement = 1;
     ASSERT_FALSE(_sut->isElement(nrOfElement));
+    auto button = std::make_unique<LetterButton>();
+    auto element = eng::Element(button);
 
-    auto buttonPtr1 = std::unique_ptr<IElement>(new LetterButton);
-    auto buttonPtr2 = std::unique_ptr<IElement>(new LetterButton);
-    //auto ID1 = buttonPtr
+    //nrOfElement = element->getElementID();
+    _sut->addItemToDraw(element);
 
-    nrOfElement = buttonPtr1->getElementID();
-    unsigned int nrOfElement2 = buttonPtr2->getElementID();
-    _sut->addItemToDraw(buttonPtr1);
-    _sut->addItemToDraw(buttonPtr2);
 
     ASSERT_TRUE(_sut->isElement(nrOfElement));
-    ASSERT_TRUE(_sut->isElement(nrOfElement2));
 }

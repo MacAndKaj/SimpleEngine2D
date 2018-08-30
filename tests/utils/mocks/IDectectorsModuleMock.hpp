@@ -2,8 +2,8 @@
 // Created by mkajdak on 30.08.18.
 //
 
-#ifndef PARANOID_IDECTECTORSMODULEMOCK_HPP
-#define PARANOID_IDECTECTORSMODULEMOCK_HPP
+#ifndef ENGINE_IDECTECTORSMODULEMOCK_HPP
+#define ENGINE_IDECTECTORSMODULEMOCK_HPP
 
 #include <gmock/gmock.h>
 #include <Modules/IDetectorsModule.hpp>
@@ -23,4 +23,4 @@ public:
 
 }
 }
-#endif //PARANOID_IDECTECTORSMODULEMOCK_HPP
+#endif //ENGINE_IDECTECTORSMODULEMOCK_HPP

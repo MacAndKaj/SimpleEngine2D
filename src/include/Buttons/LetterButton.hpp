@@ -20,28 +20,29 @@ class LetterButton
         : public IClickable, public eng::IElement
 {
 public:
-    LetterButton ();
-    ~LetterButton () override;
+    LetterButton();
+    ~LetterButton() override;
 
     //IClickable
-    void click () override;
-    void unclick () override;
-    bool isClicked () override;
-    void focus () override;
-    void unfocus () override;
+    void click() override;
+    void unclick() override;
+    bool isClicked() override;
+    void focus() override;
+    void unfocus() override;
 
     //sf::Drawable
-    void draw (sf::RenderTarget &target, sf::RenderStates states) const override;
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     //eng::IElement
     eng::ElementProperties getElementProperties() const override;
     unsigned int getElementID() const override;
+    eng::IElement *getAsElement();
 
     void setFunctionality(std::function<void()> &func);
-    void setBasicColor (const sf::Color &basicColor);
-    void setOnFocusColor (const sf::Color &onFocusColor);
-    void setOnClickColor (const sf::Color &onClickColor);
-    void setButtonText (const std::string &buttonText);
+    void setBasicColor(const sf::Color &basicColor);
+    void setOnFocusColor(const sf::Color &onFocusColor);
+    void setOnClickColor(const sf::Color &onClickColor);
+    void setButtonText(const std::string &buttonText);
 private:
     Logger _log;
     bool _clicked;
@@ -54,7 +55,11 @@ private:
     sf::Color _basicColor = sf::Color::Black;
     sf::Color _onFocusColor = sf::Color::Blue;
     sf::Color _onClickColor = sf::Color::Red;
-    std::function<void (void)> _callback;
+    std::function<void(void)> _callback;
 };
 
+namespace eng
+{
+std::unique_ptr<IElement> Element(std::unique_ptr<LetterButton> &letterButton);
+}
 #endif //ENGINE_LETTERBUTTON_HPP
