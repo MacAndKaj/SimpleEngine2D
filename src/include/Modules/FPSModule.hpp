@@ -2,8 +2,8 @@
 // Created by mkajdak on 29.08.18.
 //
 
-#ifndef PARANOID_FPSMODULE_HPP
-#define PARANOID_FPSMODULE_HPP
+#ifndef ENGINE_FPSMODULE_HPP
+#define ENGINE_FPSMODULE_HPP
 
 
 class FPSModule
@@ -12,4 +12,4 @@ class FPSModule
 };
 
 
-#endif //PARANOID_FPSMODULE_HPP
+#endif //ENGINE_FPSMODULE_HPP

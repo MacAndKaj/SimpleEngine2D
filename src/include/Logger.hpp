@@ -2,8 +2,8 @@
 // Created by maciej on 20.08.18.
 //
 
-#ifndef PARANOID_LOGGER_HPP
-#define PARANOID_LOGGER_HPP
+#ifndef ENGINE_LOGGER_HPP
+#define ENGINE_LOGGER_HPP
 
 #include <fstream>
 #include <memory>
@@ -23,15 +23,16 @@ public:
     virtual ~Logger ();
     void setNameOfLoggerOwner (const std::string &nameOfLoggerOwner);
 private:
-    std::string _buffer;
+    void addToBuffer(const std::string& arg) const{_buffer.append(arg);}
+    void clearBuffer()const;
+    mutable std::string _buffer;
     std::string _nameOfLoggerOwner;
     static std::unique_ptr<std::ofstream> _logFile;
     static void initLogFile();
-    void clearBuffer();
-    friend Logger& operator << (Logger &log, const char* strm);
-    friend Logger& operator << (Logger &log, logging strm);
+    friend const Logger& operator << (const Logger &log, const char* strm);
+    friend const Logger& operator << (const Logger &log, const logging& strm);
 };
 
 
 
-#endif //PARANOID_LOGGER_HPP
+#endif //ENGINE_LOGGER_HPP

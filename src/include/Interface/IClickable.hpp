@@ -2,8 +2,8 @@
 // Created by maciej on 30.07.18.
 //
 
-#ifndef PARANOID_ICLICKABLE_HPP
-#define PARANOID_ICLICKABLE_HPP
+#ifndef ENGINE_ICLICKABLE_HPP
+#define ENGINE_ICLICKABLE_HPP
 #include <SFML/Graphics/Drawable.hpp>
 
 class IClickable {
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //PARANOID_ICLICKABLE_HPP
+#endif //ENGINE_ICLICKABLE_HPP

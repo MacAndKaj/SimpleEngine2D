@@ -24,6 +24,6 @@ TEST_F(ElementPropertiesTests, ElementPropertiesTests_ShouldStoreOnlyCopy_Test)
 {
     startService();
     auto element = (*_sut);
-    ASSERT_EQ(_sut->getElementID(),1);
-    ASSERT_EQ(element.getElementID(),0);
+    ASSERT_EQ(_sut->getID(),1);
+    ASSERT_EQ(element.getID(),1);
 }

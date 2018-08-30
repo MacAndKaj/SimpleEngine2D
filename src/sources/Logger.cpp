@@ -7,7 +7,7 @@
 #include <Logger.hpp>
 #include <ctime>
 
-#ifdef DEBUG
+#if defined(DEBUG)
 #include <iostream>
 #endif
 
@@ -43,12 +43,12 @@ Logger::~Logger()
     }
 }
 
-void Logger::clearBuffer()
+void Logger::clearBuffer()const
 {
     if (_buffer.empty()) return;
     *_logFile << '[' << _nameOfLoggerOwner << "] " << _buffer << '\n';
-#ifdef DEBUG
-    std::cerr << '[' << _nameOfLoggerOwner << "] " << _buffer << std::endl;
+#if defined(DEBUG)
+    std::cout << '[' << _nameOfLoggerOwner << "] " << _buffer << std::endl;
 #endif
     _buffer.clear();
 }
@@ -59,18 +59,18 @@ void Logger::setNameOfLoggerOwner(const string &nameOfLoggerOwner)
     _nameOfLoggerOwner = nameOfLoggerOwner;
 }
 
-Logger &operator<<(Logger &log, const char *strm)
+const Logger &operator<<(const Logger &log, const char *strm)
 {
     std::string tmp{strm};
     tmp += ' ';
-    if (tmp.size() > 0)
+    if (not tmp.empty())
     {
-        log._buffer.append(tmp);
+        log.addToBuffer(strm);
     }
     return log;
 }
 
-Logger &operator<<(Logger &log, logging strm)
+const Logger &operator<<(const Logger &log, const logging &strm)
 {
     if (strm == logging::logEnd)
     {

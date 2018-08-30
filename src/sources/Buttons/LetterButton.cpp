@@ -13,7 +13,7 @@ LetterButton::LetterButton()
     _buttonText.setString("LetterButton");
     if (!_font.loadFromFile("Pacific_Again.ttf"))
     {
-        _log << "Error while loading font!" << logging::logEnd;
+        _log << __FUNCTION__ << "Error while loading font!" << logging::logEnd;
 
     }
     _buttonText.setFont(_font);
@@ -42,7 +42,7 @@ void LetterButton::unclick()
     {
         if (_callback)
         {
-            _log << __FUNCTION__ << "callback applied." << logging::logEnd;
+            _log << __FUNCTION__ << " callback applied." << logging::logEnd;
             _callback();
         }
         _buttonText.setFillColor(_onFocusColor);
@@ -107,6 +107,11 @@ void LetterButton::setButtonText(const std::string &buttonText)
 eng::ElementProperties LetterButton::getElementProperties() const
 {
     return _elementProperties;
+}
+
+unsigned int LetterButton::getElementID() const
+{
+    return _elementProperties.getID();
 }
 
 

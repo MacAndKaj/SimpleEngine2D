@@ -2,8 +2,8 @@
 // Created by maciej on 30.07.18.
 //
 
-#ifndef PARANOID_ICALLABLE_HPP
-#define PARANOID_ICALLABLE_HPP
+#ifndef ENGINE_ICALLABLE_HPP
+#define ENGINE_ICALLABLE_HPP
 
 
 class ICallable {
@@ -12,4 +12,4 @@ public:
 };
 
 
-#endif //PARANOID_ICALLABLE_HPP
+#endif //ENGINE_ICALLABLE_HPP

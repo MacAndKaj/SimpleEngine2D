@@ -2,8 +2,8 @@
 // Created by maciej on 13.08.18.
 //
 
-#ifndef PARANOID_NORMALBUTTON_HPP
-#define PARANOID_NORMALBUTTON_HPP
+#ifndef ENGINE_NORMALBUTTON_HPP
+#define ENGINE_NORMALBUTTON_HPP
 //TODO implement
 
 
@@ -12,4 +12,4 @@ class NormalButton {
 };
 
 
-#endif //PARANOID_NORMALBUTTON_HPP
+#endif //ENGINE_NORMALBUTTON_HPP

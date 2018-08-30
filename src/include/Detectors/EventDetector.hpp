@@ -2,8 +2,8 @@
 // Created by maciej on 27.08.18.
 //
 
-#ifndef PARANOID_EVENTDETECTOR_HPP
-#define PARANOID_EVENTDETECTOR_HPP
+#ifndef ENGINE_EVENTDETECTOR_HPP
+#define ENGINE_EVENTDETECTOR_HPP
 
 #include <Interface/IDetector.hpp>
 #include <Logger.hpp>
@@ -29,4 +29,4 @@ private:
 
 } // det
 } // eng
-#endif //PARANOID_EVENTDETECTOR_HPP
+#endif //ENGINE_EVENTDETECTOR_HPP

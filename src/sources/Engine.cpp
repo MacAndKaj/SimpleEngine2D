@@ -19,7 +19,7 @@ Engine::~Engine()
 
 }
 
-const det::DetectorsModule &Engine::getDetectorsFactory() const
+const det::IDetectorsModule &Engine::getDetectorsModule() const
 {
     return *_detectorsModule;
 }

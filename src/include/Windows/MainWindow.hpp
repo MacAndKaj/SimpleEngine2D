@@ -2,8 +2,8 @@
 // Created by maciej on 16.08.18.
 //
 
-#ifndef PARANOID_WINDOW_HPP
-#define PARANOID_WINDOW_HPP
+#ifndef ENGINE_WINDOW_HPP
+#define ENGINE_WINDOW_HPP
 
 #include <map>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -18,11 +18,12 @@ using namespace eng;
 class MainWindow
 {
 public:
-    explicit MainWindow(Engine &engine);
-    virtual ~MainWindow();
+    explicit MainWindow(IEngine &engine);
+    virtual ~MainWindow() = default;
 
     int run();
-    void addItemToDraw(sf::Drawable &);
+    void addItemToDraw(std::unique_ptr<IElement> &);
+    bool isElement(const unsigned int &id) const;
 
     //get
     unsigned int getWindowHeight() const;
@@ -34,18 +35,18 @@ public:
     void setWindowWidth(unsigned int windowWidth);
     void setWindowTitle(const std::string &windowTitle);
 private:
-    void drawAllItems();
+    void drawAllElements();
 
     unsigned int _windowHeight;
     unsigned int _windowWidth;
     sf::Color _defaultWindowColor;
     std::unique_ptr<sf::RenderWindow> _handlerWindow;
-    det::EventDetector &_eventDetector;
-    det::CollisionDetector &_collisionDetector;
+    det::IDetector &_eventDetector;
+    det::IDetector &_collisionDetector;
     std::string _windowTitle;
-    std::map<ElementProperties, std::reference_wrapper<const IElement>> _allDrawableItems;
+    std::map<unsigned int, std::unique_ptr<IElement>> _allDrawableItems;
     Logger _log;
 };
 
 
-#endif //PARANOID_WINDOW_HPP
+#endif //ENGINE_WINDOW_HPP

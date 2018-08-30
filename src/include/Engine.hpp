@@ -2,28 +2,29 @@
 // Created by mkajdak on 28.08.18.
 //
 
-#ifndef PARANOID_ENGINE_HPP
-#define PARANOID_ENGINE_HPP
+#ifndef ENGINE_ENGINE_HPP
+#define ENGINE_ENGINE_HPP
 
 #include <Modules/DetectorsModule.hpp>
+#include "IEngine.hpp"
 
 namespace eng
 {
 
-class Engine
+class Engine : public IEngine
 {
 public:
-    virtual ~Engine();
-    const det::DetectorsModule &getDetectorsFactory() const;
+    ~Engine() override;
+    const det::IDetectorsModule &getDetectorsModule() const override;
 protected:
     Engine();
 
 private:
-    std::unique_ptr<det::DetectorsModule> _detectorsModule;
+    std::unique_ptr<det::IDetectorsModule> _detectorsModule;
     Logger _log;
 
 };
 
 } //eng
 
-#endif //PARANOID_ENGINE_HPP
+#endif //ENGINE_ENGINE_HPP

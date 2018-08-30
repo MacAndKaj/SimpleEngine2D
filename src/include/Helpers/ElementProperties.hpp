@@ -2,11 +2,12 @@
 // Created by mkajdak on 29.08.18.
 //
 
-#ifndef PARANOID_ELEMENTPROPERTIES_HPP
-#define PARANOID_ELEMENTPROPERTIES_HPP
+#ifndef ENGINE_ELEMENTPROPERTIES_HPP
+#define ENGINE_ELEMENTPROPERTIES_HPP
 
 
 #include <SFML/System.hpp>
+#include <Logger.hpp>
 
 namespace eng
 {
@@ -17,21 +18,29 @@ public:
     ElementProperties() = delete;
     ElementProperties(unsigned int positionCentralY, unsigned int positionCentralX);
     ElementProperties(const ElementProperties& elementProperties);
+
+    //set
     unsigned int getPositionCentralY() const;
-    void setPositionCentralY(unsigned int positionCentralY);
     unsigned int getPositionCentralX() const;
-    void setPositionCentralX(unsigned int positionCentralX);
     const sf::Vector2f &getSize() const;
+    unsigned int getID() const;
+
+    //get
+    void setPositionCentralY(unsigned int positionCentralY);
+    void setPositionCentralX(unsigned int positionCentralX);
     void setSize(const sf::Vector2f &size);
-    unsigned int getElementID() const;
+
+    //relations
+    bool operator<(const ElementProperties &rhs) const;
 private:
     unsigned int _positionCentralY;
     unsigned int _positionCentralX;
     sf::Vector2f _size;
     unsigned int _elementID;
+    Logger _log;
     static unsigned int _amountOfRegisteredElements;
 };
 
 } //eng
 
-#endif //PARANOID_ELEMENTPROPERTIES_HPP
+#endif //ENGINE_ELEMENTPROPERTIES_HPP

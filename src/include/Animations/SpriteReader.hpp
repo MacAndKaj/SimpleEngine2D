@@ -2,8 +2,8 @@
 // Created by maciej on 29.08.18.
 //
 
-#ifndef PARANOID_SPRITEREADER_HPP
-#define PARANOID_SPRITEREADER_HPP
+#ifndef ENGINE_SPRITEREADER_HPP
+#define ENGINE_SPRITEREADER_HPP
 
 
 class SpriteReader
@@ -12,4 +12,4 @@ class SpriteReader
 };
 
 
-#endif //PARANOID_SPRITEREADER_HPP
+#endif //ENGINE_SPRITEREADER_HPP

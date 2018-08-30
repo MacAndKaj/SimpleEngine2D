@@ -2,8 +2,8 @@
 // Created by maciej on 12.08.18.
 //
 
-#ifndef PARANOID_LETTERBUTTON_HPP
-#define PARANOID_LETTERBUTTON_HPP
+#ifndef ENGINE_LETTERBUTTON_HPP
+#define ENGINE_LETTERBUTTON_HPP
 
 #include <functional>
 #include <SFML/Graphics/Drawable.hpp>
@@ -17,7 +17,7 @@
 class ICallable;
 
 class LetterButton
-        : public IClickable, protected eng::IElement
+        : public IClickable, public eng::IElement
 {
 public:
     LetterButton ();
@@ -34,9 +34,8 @@ public:
     void draw (sf::RenderTarget &target, sf::RenderStates states) const override;
 
     //eng::IElement
-protected:
     eng::ElementProperties getElementProperties() const override;
-public:
+    unsigned int getElementID() const override;
 
     void setFunctionality(std::function<void()> &func);
     void setBasicColor (const sf::Color &basicColor);
@@ -58,4 +57,4 @@ private:
     std::function<void (void)> _callback;
 };
 
-#endif //PARANOID_LETTERBUTTON_HPP
+#endif //ENGINE_LETTERBUTTON_HPP

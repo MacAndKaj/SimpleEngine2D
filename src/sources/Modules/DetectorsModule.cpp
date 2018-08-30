@@ -26,12 +26,12 @@ DetectorsModule::~DetectorsModule()
 
 }
 
-CollisionDetector &DetectorsModule::getCollisionDetector() const
+IDetector &DetectorsModule::getCollisionDetector() const
 {
     return *_collisionDetectorPtr;
 }
 
-EventDetector &DetectorsModule::getEventDetector() const
+IDetector &DetectorsModule::getEventDetector() const
 {
     return *_eventDetectorPtr;
 }

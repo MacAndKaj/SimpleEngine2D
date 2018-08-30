@@ -2,10 +2,11 @@
 // Created by mkajdak on 28.08.18.
 //
 
-#ifndef PARANOID_DETECTORSMODULE_HPP
-#define PARANOID_DETECTORSMODULE_HPP
+#ifndef ENGINE_DETECTORSMODULE_HPP
+#define ENGINE_DETECTORSMODULE_HPP
 
 #include <Logger.hpp>
+#include "IDetectorsModule.hpp"
 
 namespace eng
 {
@@ -17,12 +18,12 @@ namespace det
 class CollisionDetector;
 class EventDetector;
 
-class DetectorsModule
+class DetectorsModule : public IDetectorsModule
 {
 public:
-    CollisionDetector &getCollisionDetector() const;
-    EventDetector &getEventDetector() const;
-    virtual ~DetectorsModule();
+    IDetector &getCollisionDetector() const override;
+    IDetector &getEventDetector() const override;
+    ~DetectorsModule() override;
 protected:
     DetectorsModule();
 
@@ -36,4 +37,4 @@ private:
 };
 } //det
 } //eng
-#endif //PARANOID_DETECTORSMODULE_HPP
+#endif //ENGINE_DETECTORSMODULE_HPP

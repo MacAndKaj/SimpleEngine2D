@@ -6,11 +6,11 @@
 #include <Windows/MainWindow.hpp>
 using namespace eng;
 
-MainWindow::MainWindow(Engine &engine)
+MainWindow::MainWindow(IEngine &engine)
         : _log("MainWindow")
         , _defaultWindowColor(sf::Color::Black)
-        , _eventDetector(engine.getDetectorsFactory().getEventDetector())
-        , _collisionDetector(engine.getDetectorsFactory().getCollisionDetector())
+        , _eventDetector(engine.getDetectorsModule().getEventDetector())
+        , _collisionDetector(engine.getDetectorsModule().getCollisionDetector())
         , _windowTitle("MainWindow")
 {
     auto desktopMode = sf::VideoMode::getDesktopMode();
@@ -18,37 +18,37 @@ MainWindow::MainWindow(Engine &engine)
     _windowHeight = desktopMode.height;
     _handlerWindow = std::make_unique<sf::RenderWindow>(
             sf::VideoMode(_windowWidth, _windowHeight), _windowTitle);
-}
-
-MainWindow::~MainWindow()
-{
-
+    _handlerWindow->setVisible(false);
 }
 
 int MainWindow::run()
 {
+    _handlerWindow->setVisible(true);
     while (_handlerWindow->isOpen())
     {
         _handlerWindow->clear(_defaultWindowColor);
-        drawAllItems();
+        drawAllElements();
         _handlerWindow->display();
     }
 
     return EXIT_SUCCESS;
 }
 
-void MainWindow::addItemToDraw(sf::Drawable &item)
+void MainWindow::addItemToDraw(std::unique_ptr<IElement> &item)
 {
-
+    _log << __FUNCTION__ << " element ID: " <<
+        std::to_string(item->getElementID()).c_str() << logging::logEnd;
+    _allDrawableItems.insert(std::make_pair(
+            item->getElementID(), std::move(item)));
 }
 
-void MainWindow::drawAllItems()
+void MainWindow::drawAllElements()
 {
     if (not _allDrawableItems.empty())
     {
         for (const auto &drawableItem : _allDrawableItems)
         {
-            _handlerWindow->draw(drawableItem.second.get());
+            _handlerWindow->draw(*(drawableItem.second));
         }
     }
     else
@@ -86,3 +86,17 @@ void MainWindow::setWindowTitle(const std::string &windowTitle)
 {
     _windowTitle = windowTitle;
 }
+
+bool MainWindow::isElement(const unsigned int &id) const
+{
+    if (_allDrawableItems.find(id) != _allDrawableItems.end())
+    {
+        return true;
+    }
+    else
+    {
+        _log << __FUNCTION__ << "element with ID:"  << std::to_string(id).c_str() << " not found" << logging::logEnd;
+    }
+    return false;
+}
+

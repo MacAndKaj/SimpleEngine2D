@@ -2,8 +2,8 @@
 // Created by mkajdak on 29.08.18.
 //
 
-#ifndef PARANOID_IELEMENT_HPP
-#define PARANOID_IELEMENT_HPP
+#ifndef ENGINE_IELEMENT_HPP
+#define ENGINE_IELEMENT_HPP
 
 #include <Helpers/ElementProperties.hpp>
 #include <SFML/Graphics/Drawable.hpp>
@@ -16,8 +16,10 @@ class IElement : public sf::Drawable
 {
 public:
     IElement(): _elementProperties(0,0){}
+    IElement(const IElement&) = delete;
     virtual ~IElement() {};
     virtual ElementProperties getElementProperties() const = 0;
+    virtual unsigned int getElementID() const = 0;
 protected:
     ElementProperties _elementProperties;
 
@@ -25,4 +27,4 @@ protected:
 
 }
 
-#endif //PARANOID_IELEMENT_HPP
+#endif //ENGINE_IELEMENT_HPP

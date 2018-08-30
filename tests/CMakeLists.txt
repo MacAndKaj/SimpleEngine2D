@@ -1,10 +1,9 @@
 file(GLOB SRCS UT/*.cpp)
 find_package(Threads REQUIRED)
-include_directories ("${PROJECT_SOURCE_DIR}/src/include")
+include_directories ("${PROJECT_SOURCE_DIR}/src/include" "utils")
 add_executable(tests ${SRCS})
-include_directories("${source_dir}/googletest/include"
-        "${source_dir}/googlemock/include"
-        )
+
+
 
 # files are only copied if a target depends on them
 #add_custom_target(tests ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/Pacific_Again.ttf")
