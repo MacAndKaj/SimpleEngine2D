@@ -19,7 +19,7 @@ class MainWindow
 {
 public:
     explicit MainWindow(IEngine &engine);
-    virtual ~MainWindow() = default;
+    ~MainWindow() = default;
 
     int run();
     void addItemToDraw(std::unique_ptr<IElement> &);

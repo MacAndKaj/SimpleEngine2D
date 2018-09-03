@@ -17,7 +17,7 @@
 class ICallable;
 
 class LetterButton
-        : public IClickable, public eng::IElement
+        : public eng::IElement, public IClickable
 {
 public:
     LetterButton();
@@ -58,8 +58,5 @@ private:
     std::function<void(void)> _callback;
 };
 
-namespace eng
-{
-std::unique_ptr<IElement> Element(std::unique_ptr<LetterButton> &letterButton);
-}
+
 #endif //ENGINE_LETTERBUTTON_HPP

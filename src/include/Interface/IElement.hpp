@@ -22,8 +22,6 @@ public:
 
     IElement(const IElement &) = delete;
 
-    virtual ~IElement()
-    {};
     virtual ElementProperties getElementProperties() const = 0;
     virtual unsigned int getElementID() const = 0;
 protected:

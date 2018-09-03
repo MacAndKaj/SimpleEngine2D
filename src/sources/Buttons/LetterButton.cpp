@@ -118,18 +118,3 @@ eng::IElement *LetterButton::getAsElement()
 {
     return this;
 }
-
-namespace eng
-{
-std::unique_ptr<IElement> Element(std::unique_ptr<LetterButton> &letterButton)
-{
-    if (not letterButton)
-    {
-        return {};
-    }
-
-    return std::unique_ptr<IElement>(letterButton->getAsElement());
-
-}
-
-}
