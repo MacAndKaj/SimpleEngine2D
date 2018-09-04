@@ -7,6 +7,8 @@
 
 #include <Interface/IDetector.hpp>
 #include <Logger.hpp>
+#include <functional>
+#include <thread>
 
 namespace eng
 {
@@ -19,7 +21,8 @@ class CollisionDetector : public IDetector
 {
 public:
     virtual ~CollisionDetector();
-    void startMonitoring() override;
+    std::thread startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                                , sf::Window &window) override;
     void stopMonitoring() override;
 private:
     CollisionDetector();

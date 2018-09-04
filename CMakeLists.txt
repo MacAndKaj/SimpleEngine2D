@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(PARANOID)
+project(ENGINE)
 set(CMAKE_CXX_STANDARD 14)
 set(EXECUTABLE_NAME "PARANOID")
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)

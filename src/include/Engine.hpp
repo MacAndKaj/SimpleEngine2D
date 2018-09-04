@@ -16,7 +16,7 @@ class Engine : public IEngine
 public:
     ~Engine() override;
     const det::IDetectorsModule &getDetectorsModule() const override;
-protected:
+//protected:
     Engine();
 
 private:

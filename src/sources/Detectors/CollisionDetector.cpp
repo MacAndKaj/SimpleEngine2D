@@ -20,7 +20,8 @@ CollisionDetector::~CollisionDetector()
 
 }
 
-void CollisionDetector::startMonitoring()
+std::thread CollisionDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                                               , sf::Window &window)
 {
 
 }

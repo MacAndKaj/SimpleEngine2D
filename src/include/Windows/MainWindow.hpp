@@ -2,8 +2,8 @@
 // Created by maciej on 16.08.18.
 //
 
-#ifndef ENGINE_WINDOW_HPP
-#define ENGINE_WINDOW_HPP
+#ifndef ENGINE_MAINWINDOW_HPP
+#define ENGINE_MAINWINDOW_HPP
 
 #include <map>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -49,4 +49,4 @@ private:
 };
 
 
-#endif //ENGINE_WINDOW_HPP
+#endif //ENGINE_MAINWINDOW_// HPP
