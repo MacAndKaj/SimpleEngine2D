@@ -6,7 +6,7 @@
 #define ENGINE_IDETECTORMOCK_HPP
 
 #include <gmock/gmock.h>
-#include <Interface/IDetector.hpp>
+#include <Detectors/IEventDetector.hpp>
 
 namespace eng
 {
@@ -14,12 +14,12 @@ namespace eng
 namespace det
 {
 
-class IDetectorMock :public IDetector
+class IEventDetectorMock :public IEventDetector
 {
 public:
     MOCK_METHOD2(startMonitoring,void(
             std::function<void(sf::Event::EventType)> &notifier,
-            std::shared_ptr<sf::Window> window));
+            std::shared_ptr<IEventGenerator> generator));
     MOCK_METHOD0(stopMonitoring,void());
     MOCK_METHOD0(isMonitoring,bool());
 

@@ -17,8 +17,8 @@ namespace det
 class IDetectorsModuleMock : public IDetectorsModule
 {
 public:
-    MOCK_CONST_METHOD0(getCollisionDetector,IDetector&());
-    MOCK_CONST_METHOD0(getEventDetector,IDetector&());
+    MOCK_CONST_METHOD0(getCollisionDetector,ICollisionDetector&());
+    MOCK_CONST_METHOD0(getEventDetector,IEventDetector&());
 };
 
 }

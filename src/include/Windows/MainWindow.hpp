@@ -12,6 +12,7 @@
 #include <Helpers/ElementProperties.hpp>
 #include <Interface/IElement.hpp>
 #include <Engine.hpp>
+#include <Generators/IEventGenerator.hpp>
 
 using namespace eng;
 
@@ -41,8 +42,8 @@ private:
     unsigned int _windowWidth;
     sf::Color _defaultWindowColor;
     std::unique_ptr<sf::RenderWindow> _handlerWindow;
-    det::IDetector &_eventDetector;
-    det::IDetector &_collisionDetector;
+    det::IEventDetector &_eventDetector;
+    det::ICollisionDetector &_collisionDetector;
     std::string _windowTitle;
     std::map<unsigned int, std::unique_ptr<IElement>> _allDrawableItems;
     Logger _log;

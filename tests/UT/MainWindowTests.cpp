@@ -6,7 +6,8 @@
 #include <Windows/MainWindow.hpp>
 #include <mocks/IEngineMock.hpp>
 #include <mocks/IDectectorsModuleMock.hpp>
-#include <mocks/IDetectorMock.hpp>
+#include <mocks/IEventDetectorMock.hpp>
+#include <mocks/ICollisionDetectorMock.hpp>
 #include <Buttons/LetterButton.hpp>
 
 using ::testing::_;
@@ -28,14 +29,15 @@ protected:
         EXPECT_CALL(_engineMock, getDetectorsModule()).
                 WillRepeatedly(ReturnRef(_detectorsModuleMock));
         EXPECT_CALL(_detectorsModuleMock,getCollisionDetector()).
-                WillOnce(ReturnRef(_detectorMock));
+                WillOnce(ReturnRef(_collisionDetectorMock));
         EXPECT_CALL(_detectorsModuleMock,getEventDetector()).
-                WillOnce(ReturnRef(_detectorMock));
+                WillOnce(ReturnRef(_eventDetectorMock));
     }
 
 
 
-    eng::det::IDetectorMock _detectorMock;
+    eng::det::IEventDetectorMock _eventDetectorMock;
+    eng::det::ICollisionDetectorMock _collisionDetectorMock;
     eng::det::IDetectorsModuleMock _detectorsModuleMock;
     eng::IEngineMock _engineMock;
     std::unique_ptr<MainWindow> _sut;

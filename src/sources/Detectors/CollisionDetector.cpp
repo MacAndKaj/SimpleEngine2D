@@ -20,8 +20,8 @@ CollisionDetector::~CollisionDetector()
 
 }
 
-void CollisionDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                        , std::shared_ptr<sf::Window> window)
+void CollisionDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
+                                        std::shared_ptr<ICollisionDetector> generator)
 {
 
 }

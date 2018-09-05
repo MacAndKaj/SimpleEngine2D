@@ -21,8 +21,8 @@ class EventDetector;
 class DetectorsModule : public IDetectorsModule
 {
 public:
-    IDetector &getCollisionDetector() const override;
-    IDetector &getEventDetector() const override;
+    ICollisionDetector & getCollisionDetector() const override;
+    IEventDetector &getEventDetector() const override;
     ~DetectorsModule() override;
 protected:
     DetectorsModule();

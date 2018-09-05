@@ -20,14 +20,15 @@ EventDetector::EventDetector()
 
 EventDetector::~EventDetector()
 {
+    stopMonitoring();
 }
 
-void EventDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                    , std::shared_ptr<sf::Window> window)
+void EventDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
+                                    std::shared_ptr<IEventGenerator> generator)
 {
     _monitoring = true;
     _notifier = notifier;
-    auto thr = std::thread(&EventDetector::handleEvents,this,window);
+    auto thr = std::thread(&EventDetector::handleEvents,this,generator);
     _detectorThreads.push_back(std::move(thr));
 }
 
@@ -36,20 +37,17 @@ void EventDetector::stopMonitoring()
     _monitoring = false;
     for (auto &item : _detectorThreads)
     {
-        item.join();
+        if (item.joinable())item.join();
     }
 }
 
-void EventDetector::handleEvents( std::shared_ptr<sf::Window>  window)
+void EventDetector::handleEvents( std::shared_ptr<IEventGenerator> generator )
 {
     _log << __FUNCTION__ << " started for window" << logging::logEnd;
-    std::cout << "Jestem handler" << std::endl;
-
     sf::Event event{};
     while(_monitoring)
     {
-        std::cout << window->pollEvent(event) << std::endl;
-        if(window->pollEvent(event))
+        if(generator->pollEvent(event))
         {
             std::cout << "Jestem event" << std::endl;
             if(_notifier)

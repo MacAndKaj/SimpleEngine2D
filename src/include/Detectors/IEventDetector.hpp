@@ -8,6 +8,7 @@
 #include <functional>
 #include <SFML/Window/Event.hpp>
 #include <thread>
+#include <Generators/IEventGenerator.hpp>
 
 namespace eng
 {
@@ -15,11 +16,11 @@ namespace eng
 namespace det
 {
 
-class IDetector
+class IEventDetector
 {
 public:
-    virtual void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                 , std::shared_ptr<sf::Window> window) = 0;
+    virtual void startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
+                                 std::shared_ptr<IEventGenerator> generator) = 0;
     virtual void stopMonitoring() = 0;
     virtual bool isMonitoring() = 0;
 };

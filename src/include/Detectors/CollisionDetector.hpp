@@ -5,7 +5,7 @@
 #ifndef ENGINE_COLLISIONDETECTOR_HPP
 #define ENGINE_COLLISIONDETECTOR_HPP
 
-#include <Interface/IDetector.hpp>
+#include <Detectors/ICollisionDetector.hpp>
 #include <Logger.hpp>
 #include <functional>
 #include <thread>
@@ -17,12 +17,12 @@ class DetectorsModule;
 namespace det
 {
 
-class CollisionDetector : public IDetector
+class CollisionDetector : public ICollisionDetector
 {
 public:
-    virtual ~CollisionDetector();
-    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                         , std::shared_ptr<sf::Window> window) override;
+    ~CollisionDetector() override;
+    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
+                         std::shared_ptr<ICollisionDetector> generator) override;
     void stopMonitoring() override;
     bool isMonitoring() override;
 private:

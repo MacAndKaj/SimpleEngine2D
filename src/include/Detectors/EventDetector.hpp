@@ -5,7 +5,7 @@
 #ifndef ENGINE_EVENTDETECTOR_HPP
 #define ENGINE_EVENTDETECTOR_HPP
 
-#include <Interface/IDetector.hpp>
+#include <Detectors/IEventDetector.hpp>
 #include <Logger.hpp>
 #include <SFML/Window.hpp>
 
@@ -16,14 +16,14 @@ class DetectorsModule;
 namespace det
 {
 
-class EventDetector : public IDetector
+class EventDetector : public IEventDetector
 {
 public:
     virtual ~EventDetector();
-    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                         , std::shared_ptr<sf::Window> window) override;
+    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
+                         std::shared_ptr<IEventGenerator> generator) override;
     void stopMonitoring() override;
-    void handleEvents( std::shared_ptr<sf::Window> window);
+    void handleEvents( std::shared_ptr<IEventGenerator> generator);
     bool isMonitoring() override;
 private:
     EventDetector();

@@ -5,19 +5,21 @@
 #ifndef ENGINE_IDETECTORSMODULE_HPP
 #define ENGINE_IDETECTORSMODULE_HPP
 
+#include <Detectors/ICollisionDetector.hpp>
+
 namespace eng
 {
 namespace det
 {
 
-class IDetector;
+class IEventDetector;
 
 class IDetectorsModule
 {
 public:
     virtual ~IDetectorsModule() {};
-    virtual IDetector &getCollisionDetector() const =0;
-    virtual IDetector &getEventDetector() const = 0;
+    virtual ICollisionDetector & getCollisionDetector() const =0;
+    virtual IEventDetector &getEventDetector() const = 0;
 };
 
 }

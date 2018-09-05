@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
+#include <mocks/IEventGeneratorMock.hpp>
 #include <Detectors/EventDetector.hpp>
 #include <Engine.hpp>
-#include <mocks/SfWindowMock.hpp>
 #include <chrono>
 
 using ::testing::_;
@@ -25,6 +25,7 @@ public:
         : _engine(new Engine)
         , _sut(_engine->getDetectorsModule().getEventDetector())
     {
+
     }
 
     void callback(sf::Event::EventType)
@@ -33,25 +34,24 @@ public:
     }
 
     std::unique_ptr<Engine> _engine;
-    std::reference_wrapper<IDetector> _sut;
-    void doSomething(){std::cout << "Szukam" << std::endl;}
+    std::reference_wrapper<IEventDetector> _sut;
 };
 
 
 TEST_F(EventDetectorTests, EventDetectorTests_ShouldHandleEventAndStartMonitoring_Test)
 {
-    sf::WindowMock windowMock;
-
-    windowMock.DelegateToFake();
-    std::shared_ptr<sf::Window> windowPtr(&windowMock);
-    sf::Event event{};
-    ASSERT_TRUE(windowMock.pollEvent(event));
-    std::function<void(sf::Event::EventType)> func =
-            std::bind(&EventDetectorTests::callback,this,std::placeholders::_1);
-    _sut.get().startMonitoring(func,windowPtr);
-    ASSERT_TRUE(_sut.get().isMonitoring());
-    _sut.get().stopMonitoring();
-    ASSERT_FALSE(_sut.get().isMonitoring());
+//    sf::Event event{};
+//    EXPECT_CALL(*windowMock,pollEvent).WillRepeatedly(Return(true));
+//    ASSERT_TRUE(windowMock->pollEvent(event));
+//    std::function<void(sf::Event::EventType)> func =
+//            std::bind(&EventDetectorTests::callback,this,std::placeholders::_1);
+//    _sut.get().startMonitoring(func,windowPtr);
+//    ASSERT_TRUE(_sut.get().isMonitoring());
+//    _sut.get().stopMonitoring();
+//    ASSERT_FALSE(_sut.get().isMonitoring());
 }
+
+
+
 }
 }

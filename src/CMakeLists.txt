@@ -7,6 +7,7 @@ file(GLOB src_files
         sources/Modules/*.cpp
         sources/Scenario/*.cpp
         sources/Windows/*.cpp
+        sources/Generators/*.cpp
         sources/*.cpp)
 add_library(MyLib ${src_files})
 

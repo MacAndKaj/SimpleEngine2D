@@ -1,4 +1,4 @@
-# Install script for directory: /home/mkajdak/Dokumenty/Private/PARANOID
+# Install script for directory: /home/maciejkajdak/Dokumenty/SimpleEngine2D
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,7 +29,7 @@ endif()
 
 # Install shared libraries without execute permission?
 if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
+  set(CMAKE_INSTALL_SO_NO_EXE "0")
 endif()
 
 # Is this installation the result of a crosscompile?
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/mkajdak/Dokumenty/Private/PARANOID/src/cmake_install.cmake")
-  include("/home/mkajdak/Dokumenty/Private/PARANOID/tests/cmake_install.cmake")
+  include("/home/maciejkajdak/Dokumenty/SimpleEngine2D/src/cmake_install.cmake")
+  include("/home/maciejkajdak/Dokumenty/SimpleEngine2D/tests/cmake_install.cmake")
 
 endif()
 
@@ -52,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/mkajdak/Dokumenty/Private/PARANOID/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/maciejkajdak/Dokumenty/SimpleEngine2D/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
