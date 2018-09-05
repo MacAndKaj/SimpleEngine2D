@@ -25,27 +25,33 @@ public:
         : _engine(new Engine)
         , _sut(_engine->getDetectorsModule().getEventDetector())
     {
+    }
 
+    void callback(sf::Event::EventType)
+    {
+        std::cout << "Jestem test" << std::endl;
     }
 
     std::unique_ptr<Engine> _engine;
     std::reference_wrapper<IDetector> _sut;
-    sf::WindowMock _windowMock;
     void doSomething(){std::cout << "Szukam" << std::endl;}
 };
 
 
-TEST_F(EventDetectorTests, EventDetectorTests_ShouldHandleEvent_Test)
+TEST_F(EventDetectorTests, EventDetectorTests_ShouldHandleEventAndStartMonitoring_Test)
 {
+    sf::WindowMock windowMock;
+
+    windowMock.DelegateToFake();
+    std::shared_ptr<sf::Window> windowPtr(&windowMock);
+    sf::Event event{};
+    ASSERT_TRUE(windowMock.pollEvent(event));
     std::function<void(sf::Event::EventType)> func =
-            [this](sf::Event::EventType event){std::cout << "Jestem test" << std::endl;};
-    EXPECT_CALL(_windowMock,pollEvent(_)).WillOnce(Return(true));
-    auto thr = _sut.get().startMonitoring(func,_windowMock);
-    //EXPECT_CALL(_windowMock,pollEvent(_)).
-    //    WillRepeatedly(Invoke(&_windowMock,&sf::WindowMock::pollEventFromMock));
-    std::this_thread::sleep_for(100us);
-    thr.detach();
+            std::bind(&EventDetectorTests::callback,this,std::placeholders::_1);
+    _sut.get().startMonitoring(func,windowPtr);
+    ASSERT_TRUE(_sut.get().isMonitoring());
     _sut.get().stopMonitoring();
+    ASSERT_FALSE(_sut.get().isMonitoring());
 }
 }
 }

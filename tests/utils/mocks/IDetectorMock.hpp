@@ -17,10 +17,12 @@ namespace det
 class IDetectorMock :public IDetector
 {
 public:
-    MOCK_METHOD2(startMonitoring,std::thread(
+    MOCK_METHOD2(startMonitoring,void(
             std::function<void(sf::Event::EventType)> &notifier,
-            sf::Window &window));
+            std::shared_ptr<sf::Window> window));
     MOCK_METHOD0(stopMonitoring,void());
+    MOCK_METHOD0(isMonitoring,bool());
+
 };
 
 } //det

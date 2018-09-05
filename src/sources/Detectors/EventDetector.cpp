@@ -4,6 +4,8 @@
 
 #include <Detectors/EventDetector.hpp>
 #include <iostream>
+#include <future>
+
 namespace eng
 {
 namespace det
@@ -18,36 +20,49 @@ EventDetector::EventDetector()
 
 EventDetector::~EventDetector()
 {
-
 }
 
-std::thread EventDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                           ,sf::Window& window)
+void EventDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                                    , std::shared_ptr<sf::Window> window)
 {
     _monitoring = true;
-    _notifier = std::move(notifier);
-    return std::thread(&EventDetector::handleEvents,this,std::ref(window));
+    _notifier = notifier;
+    auto thr = std::thread(&EventDetector::handleEvents,this,window);
+    _detectorThreads.push_back(std::move(thr));
 }
 
 void EventDetector::stopMonitoring()
 {
     _monitoring = false;
+    for (auto &item : _detectorThreads)
+    {
+        item.join();
+    }
 }
 
-void EventDetector::handleEvents(sf::Window &window)
+void EventDetector::handleEvents( std::shared_ptr<sf::Window>  window)
 {
+    _log << __FUNCTION__ << " started for window" << logging::logEnd;
+    std::cout << "Jestem handler" << std::endl;
+
     sf::Event event{};
     while(_monitoring)
     {
-
-        while(window.pollEvent(event))
+        std::cout << window->pollEvent(event) << std::endl;
+        if(window->pollEvent(event))
         {
             std::cout << "Jestem event" << std::endl;
-
             if(_notifier)
                 _notifier(event.type);
         }
+
     }
+    _log << __FUNCTION__ << " stopped for window" << logging::logEnd;
+}
+
+bool EventDetector::isMonitoring()
+{
+    return _monitoring;
 }
 
 

@@ -18,9 +18,10 @@ namespace det
 class IDetector
 {
 public:
-    virtual std::thread startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                        , sf::Window &window) = 0;
+    virtual void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                                 , std::shared_ptr<sf::Window> window) = 0;
     virtual void stopMonitoring() = 0;
+    virtual bool isMonitoring() = 0;
 };
 
 } //det

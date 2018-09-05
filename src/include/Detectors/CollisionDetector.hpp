@@ -21,9 +21,10 @@ class CollisionDetector : public IDetector
 {
 public:
     virtual ~CollisionDetector();
-    std::thread startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                , sf::Window &window) override;
+    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                         , std::shared_ptr<sf::Window> window) override;
     void stopMonitoring() override;
+    bool isMonitoring() override;
 private:
     CollisionDetector();
     Logger _log;

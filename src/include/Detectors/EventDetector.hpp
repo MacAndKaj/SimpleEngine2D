@@ -20,15 +20,17 @@ class EventDetector : public IDetector
 {
 public:
     virtual ~EventDetector();
-    std::thread startMonitoring(std::function<void(sf::Event::EventType)> &notifier
-                                , sf::Window &window) override;
+    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier
+                         , std::shared_ptr<sf::Window> window) override;
     void stopMonitoring() override;
-    void handleEvents(sf::Window &window);
+    void handleEvents( std::shared_ptr<sf::Window> window);
+    bool isMonitoring() override;
 private:
     EventDetector();
 
     Logger _log;
     std::function<void(sf::Event::EventType)> _notifier;
+    std::vector<std::thread> _detectorThreads;
     friend class DetectorsModule;
     bool _monitoring;
 };
