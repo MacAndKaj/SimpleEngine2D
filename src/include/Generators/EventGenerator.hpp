@@ -7,6 +7,7 @@
 
 #include <SFML/Window.hpp>
 #include "IEventGenerator.hpp"
+#include <memory>
 
 namespace eng
 {
@@ -18,8 +19,8 @@ class EventGenerator : public IEventGenerator
 {
 public:
     explicit EventGenerator(sf::Window &window);
-    bool pollEvent(sf::Event &event) override;
-    sf::Window &_window;
+    bool pollEvent(sf::Event& event) override;
+    std::reference_wrapper<sf::Window> _window;
 };
 
 }

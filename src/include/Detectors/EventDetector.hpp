@@ -20,8 +20,8 @@ class EventDetector : public IEventDetector
 {
 public:
     virtual ~EventDetector();
-    void startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
-                         std::shared_ptr<IEventGenerator> generator) override;
+    void startMonitoring(std::function<void(sf::Event)> &notifier
+                         , std::shared_ptr<IEventGenerator> generator) override;
     void stopMonitoring() override;
     void handleEvents( std::shared_ptr<IEventGenerator> generator);
     bool isMonitoring() override;
@@ -29,7 +29,7 @@ private:
     EventDetector();
 
     Logger _log;
-    std::function<void(sf::Event::EventType)> _notifier;
+    std::function<void(sf::Event)> _notifier;
     std::vector<std::thread> _detectorThreads;
     friend class DetectorsModule;
     bool _monitoring;

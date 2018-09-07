@@ -19,8 +19,8 @@ namespace det
 class IEventDetector
 {
 public:
-    virtual void startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
-                                 std::shared_ptr<IEventGenerator> generator) = 0;
+    virtual void startMonitoring(std::function<void(sf::Event)> &notifier
+                                 , std::shared_ptr<IEventGenerator> generator) = 0;
     virtual void stopMonitoring() = 0;
     virtual bool isMonitoring() = 0;
 };

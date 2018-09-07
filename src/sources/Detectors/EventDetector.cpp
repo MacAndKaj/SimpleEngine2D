@@ -23,8 +23,8 @@ EventDetector::~EventDetector()
     stopMonitoring();
 }
 
-void EventDetector::startMonitoring(std::function<void(sf::Event::EventType)> &notifier,
-                                    std::shared_ptr<IEventGenerator> generator)
+void EventDetector::startMonitoring(std::function<void(sf::Event)> &notifier
+                                    , std::shared_ptr<IEventGenerator> generator)
 {
     _monitoring = true;
     _notifier = notifier;
@@ -49,9 +49,8 @@ void EventDetector::handleEvents( std::shared_ptr<IEventGenerator> generator )
     {
         if(generator->pollEvent(event))
         {
-            std::cout << "Jestem event" << std::endl;
             if(_notifier)
-                _notifier(event.type);
+                _notifier(event);
         }
 
     }

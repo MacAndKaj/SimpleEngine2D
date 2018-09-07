@@ -20,33 +20,39 @@ class MainWindow
 {
 public:
     explicit MainWindow(IEngine &engine);
-    ~MainWindow() = default;
+    virtual ~MainWindow()
+    {};
 
     int run();
     void addItemToDraw(std::unique_ptr<IElement> &);
     bool isElement(const unsigned int &id) const;
+    void handleEvent(sf::Event event);
 
     //get
     unsigned int getWindowHeight() const;
     unsigned int getWindowWidth() const;
-    const std::string &getWindowTitle() const;
 
+    const std::string &getWindowTitle() const;
     //set
     void setWindowHeight(unsigned int windowHeight);
     void setWindowWidth(unsigned int windowWidth);
     void setWindowTitle(const std::string &windowTitle);
 private:
     void drawAllElements();
+    void closeWindow();
+    void keyPressed(sf::Event &event);
+
 
     unsigned int _windowHeight;
     unsigned int _windowWidth;
     sf::Color _defaultWindowColor;
-    std::unique_ptr<sf::RenderWindow> _handlerWindow;
     det::IEventDetector &_eventDetector;
     det::ICollisionDetector &_collisionDetector;
+    std::shared_ptr<det::IEventGenerator> _eventGenerator;
     std::string _windowTitle;
     std::map<unsigned int, std::unique_ptr<IElement>> _allDrawableItems;
     Logger _log;
+    std::unique_ptr<sf::RenderWindow> _handlerWindow;
 };
 
 

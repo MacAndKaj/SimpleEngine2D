@@ -18,7 +18,7 @@ class IEventDetectorMock :public IEventDetector
 {
 public:
     MOCK_METHOD2(startMonitoring,void(
-            std::function<void(sf::Event::EventType)> &notifier,
+            std::function<void(sf::Event)> &notifier,
             std::shared_ptr<IEventGenerator> generator));
     MOCK_METHOD0(stopMonitoring,void());
     MOCK_METHOD0(isMonitoring,bool());

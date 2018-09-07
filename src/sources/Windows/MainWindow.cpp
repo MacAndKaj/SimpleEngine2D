@@ -4,6 +4,8 @@
 
 #include <SFML/Window/Event.hpp>
 #include <Windows/MainWindow.hpp>
+#include <Generators/EventGenerator.hpp>
+
 using namespace eng;
 
 MainWindow::MainWindow(IEngine &engine)
@@ -18,19 +20,23 @@ MainWindow::MainWindow(IEngine &engine)
     _windowHeight = desktopMode.height;
     _handlerWindow = std::make_unique<sf::RenderWindow>(
             sf::VideoMode(_windowWidth, _windowHeight), _windowTitle);
-    _handlerWindow->setVisible(false);
+    _eventGenerator = std::make_shared<det::EventGenerator>(std::ref(*_handlerWindow));
+
 }
 
 int MainWindow::run()
 {
+    std::function<void(sf::Event)> func =
+            std::bind(&MainWindow::handleEvent,this,std::placeholders::_1);
+    _eventDetector.startMonitoring(func,_eventGenerator);
     _handlerWindow->setVisible(true);
-    while (_handlerWindow->isOpen())
+    while (_handlerWindow->isOpen() and _eventDetector.isMonitoring())
     {
         _handlerWindow->clear(_defaultWindowColor);
-        drawAllElements();
+        if(not _allDrawableItems.empty()) drawAllElements();
         _handlerWindow->display();
     }
-
+    _eventDetector.stopMonitoring();
     return EXIT_SUCCESS;
 }
 
@@ -98,5 +104,28 @@ bool MainWindow::isElement(const unsigned int &id) const
         _log << __FUNCTION__ << "element with ID:"  << std::to_string(id).c_str() << " not found" << logging::logEnd;
     }
     return false;
+}
+
+void MainWindow::handleEvent(sf::Event event)
+{
+    switch (event.type)
+    {
+        case sf::Event::Closed:
+            closeWindow();
+            break;
+        case sf::Event::KeyPressed:
+            keyPressed(event);
+            break;
+    }
+}
+
+void MainWindow::closeWindow()
+{
+    _handlerWindow->close();
+}
+
+void MainWindow::keyPressed(sf::Event& event)
+{
+    if(event.key.code == sf::Keyboard::Escape) closeWindow();
 }
 
