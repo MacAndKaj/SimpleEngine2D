@@ -52,12 +52,11 @@ TEST_F(EventDetectorTests, EventDetectorTests_ShouldHandleEventAndStartMonitorin
     _callbackApplied = false;
     std::function<void(sf::Event)> func =
             std::bind(&EventDetectorTests::callback,this,std::placeholders::_1);
-    EXPECT_CALL(*_eventGeneratorMock,pollEvent)
-        .WillOnce(Return(true))
-        .WillRepeatedly(Return(false));
+    _eventGeneratorMock->delegateToFake();
     _sut.get().startMonitoring(func,_eventGeneratorMock);
     ASSERT_TRUE(_sut.get().isMonitoring());
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
     _sut.get().stopMonitoring();
     ASSERT_FALSE(_sut.get().isMonitoring());
     ASSERT_TRUE(_callbackApplied);
@@ -72,8 +71,7 @@ TEST_F(EventDetectorTests, EventDetectorTests_ShouldHandleCloseEvent_Test)
     _eventGeneratorMock->delegateToFake();
     _sut.get().startMonitoring(func,_eventGeneratorMock);
     ASSERT_TRUE(_sut.get().isMonitoring());
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    std::this_thread::sleep_for(std::chrono::nanoseconds(10));
     _sut.get().stopMonitoring();
     ASSERT_TRUE(_callbackApplied);
 }
